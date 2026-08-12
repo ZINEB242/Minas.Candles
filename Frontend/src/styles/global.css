@@ -1,0 +1,7 @@
+body{
+    background:#F8F3EC;
+}
+
+.card:hover{
+    transform: translateY(-8px);
+}
