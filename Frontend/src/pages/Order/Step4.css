@@ -1,0 +1,171 @@
+/* =========================
+   MESSAGE
+========================= */
+
+.message-section {
+  margin-top: 30px;
+
+  text-align: left;
+}
+
+.message-section label,
+.message-image-section > label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #5f504a;
+}
+
+.message-section textarea {
+  width: 100%;
+
+  min-height: 130px;
+
+  padding: 14px;
+
+  resize: vertical;
+
+  border: 1px solid #e5d9d3;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background: white;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  color: #332b28;
+}
+
+.message-section textarea:focus {
+  border-color: #c77f70;
+}
+
+.message-section textarea::placeholder {
+  color: #b1a39d;
+}
+
+.message-counter {
+  margin-top: 6px;
+
+  text-align: right;
+
+  font-size: 10px;
+
+  color: #9d918b;
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.message-image-section {
+  margin-top: 25px;
+
+  padding: 22px;
+
+  text-align: left;
+
+  background: #fffaf7;
+
+  border: 1px solid #eee5df;
+
+  border-radius: 14px;
+}
+
+.message-image-section p {
+  margin-top: 5px;
+
+  font-size: 12px;
+
+  color: #8d746b;
+}
+
+
+/* BOUTON UPLOAD */
+
+.upload-image-btn {
+  display: inline-block !important;
+
+  margin-top: 10px;
+
+  padding: 11px 18px;
+
+  border: 1px solid #d8c7c0;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #6f5d56;
+
+  font-size: 12px !important;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.upload-image-btn:hover {
+  border-color: #c77f70;
+
+  color: #c77f70;
+}
+
+.upload-image-btn input {
+  display: none;
+}
+
+
+/* APERÇU */
+
+.message-image-preview {
+  margin-top: 18px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 15px;
+}
+
+.message-image-preview img {
+  width: 120px;
+
+  height: 120px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  border: 1px solid #eee5df;
+}
+
+.message-image-preview button {
+  padding: 8px 12px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #f5e8e4;
+
+  color: #9b5e52;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.message-image-preview button:hover {
+  background: #ead7d1;
+}

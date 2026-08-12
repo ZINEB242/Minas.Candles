@@ -1,0 +1,201 @@
+.order-page {
+  min-height: calc(100vh - 74px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fffdfb;
+
+  padding: 40px 20px;
+}
+
+.order-container {
+  width: 100%;
+  max-width: 700px;
+
+  text-align: center;
+
+  padding: 60px 40px;
+
+  background: white;
+
+  border: 1px solid #eee5df;
+  border-radius: 20px;
+
+  box-shadow: 0 10px 35px rgba(80, 50, 40, 0.08);
+}
+
+.order-subtitle {
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 3px;
+
+  color: #c77f70;
+}
+
+.order-container h1 {
+  margin-top: 12px;
+
+  font-size: 38px;
+  font-weight: 600;
+
+  color: #332b28;
+}
+
+.order-container p {
+  margin-top: 12px;
+
+  font-size: 14px;
+
+  color: #8d746b;
+}
+
+.start-order-btn {
+  margin-top: 25px;
+
+  padding: 13px 28px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #c77f70;
+  color: white;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.start-order-btn:hover {
+  background: #b86f61;
+
+  transform: translateY(-2px);
+}
+/* =========================
+   ÉTAPE DE COMMANDE
+========================= */
+
+.step-number {
+  display: inline-block;
+
+  margin-bottom: 20px;
+
+  padding: 6px 14px;
+
+  border-radius: 20px;
+
+  background: #f8f0ed;
+
+  color: #c77f70;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* OCCASIONS */
+
+.occasion-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+
+.occasion-card {
+  min-height: 120px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 20px;
+
+  background: #fff;
+
+  border: 1px solid #eee5df;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.occasion-card:hover {
+  border-color: #c77f70;
+
+  transform: translateY(-2px);
+}
+
+
+.occasion-card.selected {
+  border: 2px solid #c77f70;
+
+  background: #fff8f5;
+}
+
+
+.occasion-emoji {
+  font-size: 30px;
+}
+
+
+.occasion-title {
+  font-size: 13px;
+
+  font-weight: 500;
+
+  color: #332b28;
+}
+
+
+/* BOUTON CONTINUER */
+
+.next-btn {
+  width: 100%;
+
+  margin-top: 25px;
+
+  padding: 13px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #c77f70;
+
+  color: white;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.next-btn:disabled {
+  background: #ddd2ce;
+
+  cursor: not-allowed;
+}
+
+
+.next-btn:not(:disabled):hover {
+  background: #b86f61;
+}

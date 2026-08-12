@@ -1,6 +1,7 @@
 import LeftSidebar from "../../components/layout/LeftSidebar";
 import RightSidebar from "../../components/layout/RightSidebar";
 import PostCard from "../../components/community/PostCard";
+
 import posts from "../../data/posts";
 
 import "./Home.css";
@@ -9,11 +10,10 @@ const Home = () => {
   return (
     <main className="home-page">
 
-      {/* LEFT SIDEBAR */}
+      {/* SIDEBAR GAUCHE */}
       <LeftSidebar />
 
-
-      {/* NEWS FEED */}
+      {/* FIL D'ACTUALITÉ */}
       <section className="news-feed">
 
         {/* SHARE CARD */}
@@ -30,7 +30,6 @@ const Home = () => {
             </span>
 
           </div>
-
 
           <div className="share-options">
 
@@ -55,19 +54,21 @@ const Home = () => {
         </div>
 
 
-        {/* POSTS */}
+        {/* PUBLICATIONS */}
 
         {posts.map((post) => (
+
           <PostCard
             key={post.id}
             post={post}
           />
+
         ))}
 
       </section>
 
 
-      {/* RIGHT SIDEBAR */}
+      {/* SIDEBAR DROIT */}
       <RightSidebar />
 
     </main>

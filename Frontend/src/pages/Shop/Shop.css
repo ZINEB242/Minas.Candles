@@ -1,0 +1,102 @@
+/* =========================
+   SHOP PAGE
+========================= */
+
+.shop-page {
+  min-height: 100vh;
+  background: #fffdfb;
+  padding-bottom: 60px;
+}
+
+
+/* =========================
+   SHOP HEADER
+========================= */
+
+.shop-header {
+  text-align: center;
+  padding: 55px 20px 35px;
+}
+
+.shop-subtitle {
+  display: block;
+  margin-bottom: 10px;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+
+  color: #c77f70;
+}
+
+.shop-header h1 {
+  margin: 0;
+
+  font-size: 38px;
+  font-weight: 600;
+
+  color: #332b28;
+}
+
+.shop-header p {
+  margin-top: 12px;
+
+  font-size: 14px;
+  color: #8d746b;
+}
+
+
+/* =========================
+   PRODUCTS SECTION
+========================= */
+
+.products-section {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+/* =========================
+   PRODUCTS GRID
+========================= */
+
+.products-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 25px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 992px) {
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 576px) {
+
+  .shop-header {
+    padding: 40px 15px 25px;
+  }
+
+  .shop-header h1 {
+    font-size: 30px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

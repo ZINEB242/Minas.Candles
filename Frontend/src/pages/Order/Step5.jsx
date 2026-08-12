@@ -1,120 +1,207 @@
-const Step5 = ({ nextStep, prevStep, formData, setFormData }) => {
+import "./Step5.css";
+
+const Step5 = ({
+  customer,
+  setCustomer,
+  onNext,
+  onBack,
+}) => {
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setCustomer({
+      ...customer,
+      [name]: value,
+    });
+  };
+
+  const isComplete =
+    customer.firstName.trim() !== "" &&
+    customer.lastName.trim() !== "" &&
+    customer.phone.trim() !== "" &&
+    customer.wilaya.trim() !== "" &&
+    customer.commune.trim() !== "" &&
+    customer.address.trim() !== "";
 
   return (
+    <section className="order-container">
 
-    <div className="container py-5">
+      {/* PROGRESSION */}
 
-      <h2 className="text-center mb-5">
+      <div className="step-number">
+        Étape 5 sur 5
+      </div>
 
-        Informations de livraison
+      <span className="order-subtitle">
+        LIVRAISON
+      </span>
 
-      </h2>
+      <h1>
+        Où devons-nous livrer votre commande ?
+      </h1>
 
-      <div className="row g-3">
+      <p>
+        Renseignez vos coordonnées pour que nous puissions vous contacter.
+      </p>
 
-        <div className="col-md-6">
+      {/* FORMULAIRE */}
+
+      <div className="address-form">
+
+        {/* PRÉNOM */}
+
+        <div className="form-group">
+
+          <label>
+            Prénom *
+          </label>
+
           <input
-            className="form-control"
-            placeholder="Nom"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                lastName: e.target.value,
-              })
-            }
+            type="text"
+            name="firstName"
+            placeholder="Votre prénom"
+            value={customer.firstName}
+            onChange={handleChange}
           />
+
         </div>
 
-        <div className="col-md-6">
+        {/* NOM */}
+
+        <div className="form-group">
+
+          <label>
+            Nom *
+          </label>
+
           <input
-            className="form-control"
-            placeholder="Prénom"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                firstName: e.target.value,
-              })
-            }
+            type="text"
+            name="lastName"
+            placeholder="Votre nom"
+            value={customer.lastName}
+            onChange={handleChange}
           />
+
         </div>
 
-        <div className="col-md-6">
+        {/* TÉLÉPHONE */}
+
+        <div className="form-group full-width">
+
+          <label>
+            Numéro de téléphone *
+          </label>
+
           <input
-            className="form-control"
-            placeholder="Téléphone"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                phone: e.target.value,
-              })
-            }
+            type="tel"
+            name="phone"
+            placeholder="Ex : 0550 00 00 00"
+            value={customer.phone}
+            onChange={handleChange}
           />
+
         </div>
 
-        <div className="col-md-6">
+        {/* WILAYA */}
+
+        <div className="form-group">
+
+          <label>
+            Wilaya *
+          </label>
+
           <input
-            className="form-control"
-            placeholder="Wilaya"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                wilaya: e.target.value,
-              })
-            }
+            type="text"
+            name="wilaya"
+            placeholder="Ex : Alger"
+            value={customer.wilaya}
+            onChange={handleChange}
           />
+
         </div>
 
-        <div className="col-12">
+        {/* COMMUNE */}
+
+        <div className="form-group">
+
+          <label>
+            Commune *
+          </label>
+
           <input
-            className="form-control"
-            placeholder="Commune"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                commune: e.target.value,
-              })
-            }
+            type="text"
+            name="commune"
+            placeholder="Ex : Bab Ezzouar"
+            value={customer.commune}
+            onChange={handleChange}
           />
+
         </div>
 
-        <div className="col-12">
+        {/* ADRESSE */}
+
+        <div className="form-group full-width">
+
+          <label>
+            Adresse exacte *
+          </label>
+
           <textarea
-            className="form-control"
-            rows="4"
-            placeholder="Adresse exacte..."
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                address: e.target.value,
-              })
-            }
+            name="address"
+            placeholder="Numéro, rue, résidence..."
+            value={customer.address}
+            onChange={handleChange}
           />
+
+        </div>
+
+        {/* INDICATION */}
+
+        <div className="form-group full-width">
+
+          <label>
+            Indication supplémentaire
+            <span className="optional">
+              (facultatif)
+            </span>
+          </label>
+
+          <input
+            type="text"
+            name="note"
+            placeholder="Ex : près de la pharmacie..."
+            value={customer.note}
+            onChange={handleChange}
+          />
+
         </div>
 
       </div>
 
-      <div className="d-flex justify-content-between mt-5">
+      {/* NAVIGATION */}
+
+      <div className="order-navigation">
 
         <button
-          className="btn btn-outline-secondary"
-          onClick={prevStep}
+          className="back-btn"
+          onClick={onBack}
         >
-          Retour
+          ← Retour
         </button>
 
         <button
-          className="btn btn-success"
-          onClick={nextStep}
+          className="next-btn"
+          disabled={!isComplete}
+          onClick={onNext}
         >
-          Voir le récapitulatif
+          Voir mon résumé →
         </button>
 
       </div>
 
-    </div>
-
+    </section>
   );
-
 };
 
 export default Step5;

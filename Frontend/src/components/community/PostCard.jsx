@@ -10,26 +10,21 @@ import {
 
 import "./PostCard.css";
 
-
 const PostCard = ({ post }) => {
 
-  // =========================
-  // STATES
-  // =========================
-
-  // Like
+  // LIKE
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(post.likes);
 
-  // Commentaires
+  // COMMENTAIRES
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
 
-  // Partages
+  // PARTAGES
   const [shares, setShares] = useState(post.shares);
 
-  // Enregistrer
+  // ENREGISTRER
   const [saved, setSaved] = useState(false);
 
 
@@ -82,24 +77,20 @@ const PostCard = ({ post }) => {
 
 
   // =========================
-  // RETURN
+  // AFFICHAGE
   // =========================
 
   return (
 
     <article className="post-card">
 
-
-      {/* ================================= */}
       {/* HEADER */}
-      {/* ================================= */}
 
       <div className="post-header">
 
         <div className="post-avatar">
           {post.author.charAt(0)}
         </div>
-
 
         <div className="post-author">
 
@@ -113,20 +104,14 @@ const PostCard = ({ post }) => {
 
         </div>
 
-
         <button className="post-menu">
-
           <FaEllipsisH />
-
         </button>
 
       </div>
 
 
-
-      {/* ================================= */}
       {/* CONTENU */}
-      {/* ================================= */}
 
       <div className="post-content">
 
@@ -137,10 +122,7 @@ const PostCard = ({ post }) => {
       </div>
 
 
-
-      {/* ================================= */}
       {/* IMAGE */}
-      {/* ================================= */}
 
       {post.image && (
 
@@ -156,10 +138,7 @@ const PostCard = ({ post }) => {
       )}
 
 
-
-      {/* ================================= */}
       {/* PRODUIT */}
-      {/* ================================= */}
 
       {post.product && (
 
@@ -177,7 +156,6 @@ const PostCard = ({ post }) => {
 
           </div>
 
-
           <button>
             Commander
           </button>
@@ -187,17 +165,13 @@ const PostCard = ({ post }) => {
       )}
 
 
-
-      {/* ================================= */}
       {/* STATISTIQUES */}
-      {/* ================================= */}
 
       <div className="post-stats">
 
         <span>
           ❤️ {likes}
         </span>
-
 
         <span>
           {comments.length > 0
@@ -206,7 +180,6 @@ const PostCard = ({ post }) => {
           } commentaires
         </span>
 
-
         <span>
           {shares} partages
         </span>
@@ -214,13 +187,9 @@ const PostCard = ({ post }) => {
       </div>
 
 
-
-      {/* ================================= */}
       {/* ACTIONS */}
-      {/* ================================= */}
 
       <div className="post-actions">
-
 
         {/* LIKE */}
 
@@ -234,7 +203,6 @@ const PostCard = ({ post }) => {
           J'aime
 
         </button>
-
 
 
         {/* COMMENTAIRE */}
@@ -252,7 +220,6 @@ const PostCard = ({ post }) => {
         </button>
 
 
-
         {/* PARTAGER */}
 
         <button
@@ -264,7 +231,6 @@ const PostCard = ({ post }) => {
           Partager
 
         </button>
-
 
 
         {/* ENREGISTRER */}
@@ -288,15 +254,11 @@ const PostCard = ({ post }) => {
       </div>
 
 
-
-      {/* ================================= */}
-      {/* SECTION COMMENTAIRES */}
-      {/* ================================= */}
+      {/* COMMENTAIRES */}
 
       {showComments && (
 
         <div className="comments-section">
-
 
           {/* FORMULAIRE */}
 
@@ -318,7 +280,6 @@ const PostCard = ({ post }) => {
               }}
             />
 
-
             <button
               onClick={handleComment}
             >
@@ -328,8 +289,7 @@ const PostCard = ({ post }) => {
           </div>
 
 
-
-          {/* LISTE DES COMMENTAIRES */}
+          {/* LISTE */}
 
           <div className="comments-list">
 
@@ -340,18 +300,9 @@ const PostCard = ({ post }) => {
                 key={index}
               >
 
-
-                {/* AVATAR */}
-
                 <div className="comment-avatar">
-
                   M
-
                 </div>
-
-
-
-                {/* CONTENU */}
 
                 <div className="comment-content">
 
@@ -378,8 +329,6 @@ const PostCard = ({ post }) => {
     </article>
 
   );
-
 };
-
 
 export default PostCard;

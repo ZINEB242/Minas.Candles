@@ -1,0 +1,85 @@
+.fragrance-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+.fragrance-card {
+  min-height: 130px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  background: white;
+
+  border: 1px solid #eee5df;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.fragrance-card:hover {
+  border-color: #c77f70;
+
+  transform: translateY(-2px);
+}
+
+.fragrance-card.selected {
+  border: 2px solid #c77f70;
+
+  background: #fff8f5;
+}
+
+.fragrance-emoji {
+  font-size: 32px;
+}
+
+.fragrance-name {
+  font-size: 13px;
+
+  color: #332b28;
+
+  font-weight: 500;
+}
+
+.order-navigation {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.order-navigation button {
+  flex: 1;
+}
+
+.back-btn {
+  padding: 13px;
+
+  border: 1px solid #eee5df;
+
+  border-radius: 10px;
+
+  background: white;
+
+  color: #6f5d56;
+
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: #f8f4f1;
+}

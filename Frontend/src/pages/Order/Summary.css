@@ -1,0 +1,274 @@
+.summary-container {
+  width: 100%;
+  max-width: 720px;
+
+  margin: 40px auto;
+
+  padding: 0 20px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+}
+
+.summary-container h1 {
+  margin-top: 8px;
+
+  font-size: 30px;
+
+  color: #332b28;
+}
+
+.summary-container > p {
+  font-size: 13px;
+
+  color: #8d746b;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.summary-card {
+  margin-top: 25px;
+
+  padding: 24px;
+
+  background: #fff;
+
+  border: 1px solid #eee5df;
+
+  border-radius: 16px;
+
+  box-shadow: 0 4px 15px rgba(80, 50, 40, 0.05);
+
+  text-align: left;
+}
+
+.summary-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 17px;
+
+  color: #332b28;
+}
+
+
+/* =========================
+   ROW
+========================= */
+
+.summary-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid #f1e9e5;
+
+  font-size: 13px;
+}
+
+.summary-row span {
+  color: #8d746b;
+}
+
+.summary-row strong {
+  color: #332b28;
+
+  text-align: right;
+}
+
+
+/* =========================
+   COLORS
+========================= */
+
+.summary-colors {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: flex-end;
+
+  gap: 7px;
+}
+
+.summary-color {
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  background: #f8efeb;
+
+  color: #765d54;
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.summary-message {
+  padding-top: 18px;
+}
+
+.summary-message > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #8d746b;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.summary-message p {
+  margin: 0;
+
+  padding: 12px;
+
+  background: #fffaf7;
+
+  border-radius: 9px;
+
+  color: #4d403b;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.summary-image {
+  margin-top: 18px;
+}
+
+.summary-image > span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #8d746b;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.summary-image img {
+  width: 120px;
+
+  height: 120px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  border: 1px solid #eee5df;
+}
+
+
+/* =========================
+   CLIENT
+========================= */
+
+.customer-name {
+  margin-bottom: 10px;
+
+  font-size: 15px;
+
+  color: #332b28;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.summary-navigation {
+  margin-top: 30px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.summary-navigation button {
+  min-height: 44px;
+
+  padding: 0 20px;
+
+  border-radius: 9px;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.confirm-btn {
+  border: none;
+
+  background: #c77f70;
+
+  color: white;
+
+  font-weight: 600;
+
+  flex: 1;
+}
+
+.confirm-btn:hover {
+  background: #b96e60;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .summary-container {
+    margin-top: 25px;
+  }
+
+  .summary-container h1 {
+    font-size: 24px;
+  }
+
+  .summary-row {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 5px;
+  }
+
+  .summary-row strong {
+    text-align: left;
+  }
+
+  .summary-colors {
+    justify-content: flex-start;
+  }
+
+  .summary-navigation {
+    flex-direction: column;
+  }
+
+}

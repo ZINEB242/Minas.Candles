@@ -1,107 +1,105 @@
-const fragrances = [
-  {
-    id: 1,
-    name: "Lait de Coco",
-    emoji: "🥥",
-    description: "Douce et exotique",
-  },
-  {
-    id: 2,
-    name: "Lait d'Amande",
-    emoji: "🌰",
-    description: "Chaleureuse et gourmande",
-  },
-  {
-    id: 3,
-    name: "Jasmin",
-    emoji: "🌸",
-    description: "Florale et élégante",
-  },
-  {
-    id: 4,
-    name: "Rose",
-    emoji: "🌹",
-    description: "Romantique",
-  },
-  {
-    id: 5,
-    name: "Rose Petal",
-    emoji: "🌺",
-    description: "Délicate",
-  },
-  {
-    id: 6,
-    name: "Lovely",
-    emoji: "🌴",
-    description: "Exotique",
-  },
-];
+import "./Step2.css";
 
-const Step2 = ({ nextStep, prevStep, formData, setFormData }) => {
+const Step2 = ({ fragrance, setFragrance, onNext, onBack }) => {
+
+  const fragrances = [
+    {
+      id: "coco",
+      name: "Lait de coco",
+      emoji: "🥥",
+    },
+    {
+      id: "amande",
+      name: "Lait d'amande",
+      emoji: "🌰",
+    },
+    {
+      id: "jasmin",
+      name: "Jasmin",
+      emoji: "🌼",
+    },
+    {
+      id: "rose",
+      name: "Rose",
+      emoji: "🌹",
+    },
+    {
+      id: "rose-petal",
+      name: "Rose Petal",
+      emoji: "🌸",
+    },
+    {
+      id: "lovely",
+      name: "Lovely",
+      emoji: "✨",
+    },
+  ];
+
   return (
-    <div className="container py-5">
+    <section className="order-container">
 
-      <h2 className="text-center mb-5">
-        Choisissez une senteur
-      </h2>
+      <div className="step-number">
+        Étape 2 sur 5
+      </div>
 
-      <div className="row g-4">
+      <span className="order-subtitle">
+        VOTRE CRÉATION
+      </span>
+
+      <h1>
+        Choisissez votre senteur
+      </h1>
+
+      <p>
+        Quelle ambiance souhaitez-vous donner à votre bougie ?
+      </p>
+
+      <div className="fragrance-grid">
 
         {fragrances.map((item) => (
 
-          <div className="col-md-4" key={item.id}>
+          <button
+            key={item.id}
+            className={`fragrance-card ${
+              fragrance === item.id ? "selected" : ""
+            }`}
+            onClick={() => setFragrance(item.id)}
+          >
 
-            <div
-              className={`card p-4 text-center shadow-sm ${
-                formData.fragrance === item.name
-                  ? "border border-3 border-danger"
-                  : ""
-              }`}
-              style={{
-                cursor: "pointer",
-                borderRadius: "20px",
-              }}
-              onClick={() =>
-                setFormData({
-                  ...formData,
-                  fragrance: item.name,
-                })
-              }
-            >
-              <h1>{item.emoji}</h1>
+            <span className="fragrance-emoji">
+              {item.emoji}
+            </span>
 
-              <h4>{item.name}</h4>
+            <span className="fragrance-name">
+              {item.name}
+            </span>
 
-              <p>{item.description}</p>
-
-            </div>
-
-          </div>
+          </button>
 
         ))}
 
       </div>
 
-      <div className="d-flex justify-content-between mt-5">
+      <div className="order-navigation">
 
         <button
-          className="btn btn-outline-secondary"
-          onClick={prevStep}
+          className="back-btn"
+          onClick={onBack}
         >
-          Retour
+          ← Retour
         </button>
 
         <button
-          className="btn btn-dark"
-          disabled={!formData.fragrance}
-          onClick={nextStep}
+          className="next-btn"
+          disabled={!fragrance}
+          onClick={onNext}
         >
-          Suivant
+          Continuer →
         </button>
 
       </div>
 
-    </div>
+    </section>
   );
 };
 

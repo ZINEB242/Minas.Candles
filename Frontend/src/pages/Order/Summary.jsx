@@ -1,140 +1,208 @@
-const Summary = ({ formData }) => {
+import "./Summary.css";
 
-  const handleSubmit = () => {
-
-    // Plus tard :
-    // axios.post("http://localhost:3001/orders", formData)
-
-    alert("Votre commande a été envoyée avec succès !");
-
-    console.log(formData);
-
-  };
-
+const Summary = ({
+  occasion,
+  fragrance,
+  colors,
+  message,
+  messageImage,
+  customer,
+  onBack,
+  onConfirm,
+}) => {
   return (
+    <section className="summary-container">
 
-    <div className="container py-5">
+      <div className="step-number">
+        Résumé de votre commande
+      </div>
 
-      <div
-        className="card shadow-lg border-0 mx-auto"
-        style={{
-          maxWidth: "700px",
-          borderRadius: "20px",
-        }}
-      >
+      <span className="order-subtitle">
+        MINAS CANDLES
+      </span>
 
-        <div className="card-body p-5">
+      <h1>
+        Vérifiez votre commande
+      </h1>
 
-          <h2
-            className="text-center mb-5 fw-bold"
-            style={{ color: "#4E3A33" }}
-          >
-            Récapitulatif de votre commande
-          </h2>
+      <p>
+        Tout est prêt ! Vérifiez les informations avant de confirmer.
+      </p>
 
-          <div className="row">
+      {/* =========================
+          PERSONNALISATION
+      ========================= */}
 
-            <div className="col-6">
+      <div className="summary-card">
 
-              <h5>🎁 Occasion</h5>
-              <p>{formData.occasion}</p>
+        <h2>
+          🕯️ Votre bougie
+        </h2>
 
-              <h5>🌸 Senteur</h5>
-              <p>{formData.fragrance}</p>
+        <div className="summary-row">
+          <span>Occasion</span>
+          <strong>{occasion || "Non précisée"}</strong>
+        </div>
 
-              <h5>🎨 Couleur</h5>
+        <div className="summary-row">
+          <span>Senteur</span>
+          <strong>{fragrance || "Non précisée"}</strong>
+        </div>
 
-              <div
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: formData.color,
-                  border: "1px solid #ccc",
-                }}
-              />
+        <div className="summary-row">
 
-            </div>
+          <span>Couleurs</span>
 
-            <div className="col-6">
+          <div className="summary-colors">
 
-              <h5>👤 Client</h5>
-
-              <p>
-                {formData.firstName} {formData.lastName}
-              </p>
-
-              <h5>📞 Téléphone</h5>
-
-              <p>{formData.phone}</p>
-
-              <h5>📍 Adresse</h5>
-
-              <p>
-                {formData.address}
-                <br />
-                {formData.commune}
-                <br />
-                {formData.wilaya}
-              </p>
-
-            </div>
-
-          </div>
-
-          <hr />
-
-          <h5>💌 Message</h5>
-
-          <div
-            className="p-3 rounded"
-            style={{
-              background: "#F8F3EC",
-            }}
-          >
-            {formData.message || "Aucun message"}
-          </div>
-
-          <hr />
-
-          <div className="d-flex justify-content-between align-items-center">
-
-            <div>
-
-              <h4
-                className="fw-bold"
-                style={{
-                  color: "#C98E7A",
-                }}
-              >
-                Prix estimé
-              </h4>
-
-              <h3>2500 DA</h3>
-
-            </div>
-
-            <button
-              className="btn btn-lg"
-              style={{
-                background: "#C98E7A",
-                color: "white",
-              }}
-              onClick={handleSubmit}
-            >
-              Confirmer la commande
-            </button>
+            {colors.length > 0 ? (
+              colors.map((color, index) => (
+                <span
+                  className="summary-color"
+                  key={index}
+                >
+                  {color}
+                </span>
+              ))
+            ) : (
+              <strong>Personnalisée</strong>
+            )}
 
           </div>
 
         </div>
 
+        <div className="summary-message">
+
+          <span>Message</span>
+
+          <p>
+            {message || "Aucun message"}
+          </p>
+
+        </div>
+
+        {/* IMAGE */}
+
+        {messageImage && (
+          <div className="summary-image">
+
+            <span>
+              Image de référence
+            </span>
+
+            <img
+              src={
+                typeof messageImage === "string"
+                  ? messageImage
+                  : URL.createObjectURL(messageImage)
+              }
+              alt="Référence"
+            />
+
+          </div>
+        )}
+
       </div>
 
-    </div>
 
+      {/* =========================
+          LIVRAISON
+      ========================= */}
+
+      <div className="summary-card">
+
+        <h2>
+          📍 Livraison
+        </h2>
+
+        <div className="customer-name">
+
+          <strong>
+            {customer.firstName} {customer.lastName}
+          </strong>
+
+        </div>
+
+        <div className="summary-row">
+
+          <span>Téléphone</span>
+
+          <strong>
+            {customer.phone}
+          </strong>
+
+        </div>
+
+        <div className="summary-row">
+
+          <span>Wilaya</span>
+
+          <strong>
+            {customer.wilaya}
+          </strong>
+
+        </div>
+
+        <div className="summary-row">
+
+          <span>Commune</span>
+
+          <strong>
+            {customer.commune}
+          </strong>
+
+        </div>
+
+        <div className="summary-message">
+
+          <span>Adresse</span>
+
+          <p>
+            {customer.address}
+          </p>
+
+        </div>
+
+        {customer.note && (
+          <div className="summary-message">
+
+            <span>Indication</span>
+
+            <p>
+              {customer.note}
+            </p>
+
+          </div>
+        )}
+
+      </div>
+
+
+      {/* =========================
+          NAVIGATION
+      ========================= */}
+
+      <div className="summary-navigation">
+
+        <button
+          className="back-btn"
+          onClick={onBack}
+        >
+          ← Modifier
+        </button>
+
+        <button
+          className="confirm-btn"
+          onClick={onConfirm}
+        >
+          ✓ Confirmer ma commande
+        </button>
+
+      </div>
+
+    </section>
   );
-
 };
 
 export default Summary;
