@@ -1,0 +1,85 @@
+/* COMMENTAIRES */
+
+.comments-section {
+  padding: 15px 0 5px;
+  border-top: 1px solid #eee5df;
+}
+
+.comment-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.comment-form input {
+  flex: 1;
+  border: 1px solid #eee5df;
+  background: #faf7f4;
+  border-radius: 20px;
+  padding: 10px 15px;
+  outline: none;
+  font-size: 13px;
+}
+
+.comment-form input:focus {
+  border-color: #c77f70;
+}
+
+.comment-form button {
+  border: none;
+  background: #c77f70;
+  color: white;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.comment {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #d9b3a7;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.comment-content {
+  background: #f8f4f1;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.comment-content strong {
+  font-size: 11px;
+}
+
+.comment-content p {
+  margin: 3px 0 0;
+  font-size: 12px;
+}
+
+
+/* BOUTON LIKE */
+
+.post-actions button.liked {
+  color: #c77f70;
+}
+
+
+/* BOUTON ENREGISTRER */
+
+.post-actions button.saved {
+  color: #c77f70;
+}

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Navbar from "./components/layout/Navbar";
-import Hero from "./components/common/Hero";
+import LeftSidebar from "./components/layout/LeftSidebar";
+import RightSidebar from "./components/layout/RightSidebar";
+import Home from "./pages/Home/Home";
 import Categories from "./components/products/Categories";
 import ProductSection from "./components/products/ProductSection";
 import CustomOrderBanner from "./components/forms/CustomOrderBanner";
@@ -9,7 +11,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <Hero />
+      
+      {/* <Hero /> */}
+        <Home />
       <Categories />
       <ProductSection />
        <CustomOrderBanner />

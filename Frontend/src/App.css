@@ -182,3 +182,14 @@
     border-right-color: var(--border);
   }
 }
+.main-layout {
+  display: flex;
+
+  gap: 20px;
+
+  padding: 20px 30px;
+
+  background: #faf6f2;
+
+  min-height: calc(100vh - 74px);
+}
