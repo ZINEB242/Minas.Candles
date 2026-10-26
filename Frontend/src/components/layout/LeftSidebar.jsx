@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   FaEllipsisV,
   FaUser,
@@ -9,34 +10,98 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 
+import { Link } from "react-router-dom";
 import "./LeftSidebar.css";
 
 const LeftSidebar = () => {
+    const storedUser = localStorage.getItem("minasUser");
+
+  const currentUser = storedUser ? JSON.parse(storedUser) : null;
+
+  const isAdmin = currentUser?.role === "admin";
+  const [orderStats, setOrderStats] = useState({
+    enCours: 0,
+    livrees: 0,
+    annulees: 0,
+  });
+
+  useEffect(() => {
+    const fetchOrderStats = async () => {
+      const token = localStorage.getItem("minasToken");
+
+      if (!token) return;
+
+      try {
+        const response = await fetch("http://localhost:3000/api/orders/admin-stats", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          setOrderStats(data.stats);
+        }
+      } catch (error) {
+        console.error(
+          "Erreur de récupération des statistiques :",
+          error
+        );
+      }
+    };
+
+   fetchOrderStats();
+
+const intervalId = setInterval(fetchOrderStats, 5000);
+
+return () => clearInterval(intervalId);
+}, []);
+
   return (
     <aside className="left-sidebar">
 
       {/* ================= PROFIL ================= */}
 
-      <div className="sidebar-card profile-card">
+           {/* ================= PRESENTATION / PROFIL ================= */}
 
-        <div className="card-title">
-          <span>Mon Profil</span>
-          <FaEllipsisV />
+      {isAdmin ? (
+        <div className="sidebar-card profile-card">
+          <div className="card-title">
+            <span>Mon Profil</span>
+            <FaEllipsisV />
+          </div>
+
+          <div className="profile-picture">
+            <FaUser />
+          </div>
+
+          <h3>Minas Candles</h3>
+          <p>Administration de la boutique</p>
+
+          <Link to="/profile" className="profile-button">
+            Voir mon profil
+          </Link>
         </div>
+      ) : (
+        <div className="sidebar-card discover-card">
+          <div className="profile-picture">
+            <FaGift />
+          </div>
 
-        <div className="profile-picture">
-          <FaUser />
+          <h3>Découvrir Minas Candles</h3>
+
+          <p>
+            Des créations artisanales pensées pour offrir,
+            décorer et créer de beaux souvenirs.
+          </p>
+
+          <Link to="/discover-minas" className="profile-button">
+  Découvrir Minas Candles
+</Link>
         </div>
-
-        <h3>Minas Candles</h3>
-
-        <p>Artisanat de bougies</p>
-
-        <button className="profile-button">
-          Voir mon profil
-        </button>
-
-      </div>
+      )}
 
 
       {/* ================= COMMANDES ================= */}
@@ -49,20 +114,19 @@ const LeftSidebar = () => {
         </div>
 
         <div className="order-row">
-          <span>En cours</span>
-          <span className="order-number">2</span>
-        </div>
+  <span>En cours</span>
+  <span className="order-number">{orderStats.enCours}</span>
+</div>
 
-        <div className="order-row">
-          <span>Livrées</span>
-          <span className="order-number">12</span>
-        </div>
+<div className="order-row">
+  <span>Livrées</span>
+  <span className="order-number">{orderStats.livrees}</span>
+</div>
 
-        <div className="order-row">
-          <span>Annulées</span>
-          <span className="order-number cancelled">0</span>
-        </div>
-
+<div className="order-row">
+  <span>Annulées</span>
+  <span className="order-number cancelled">{orderStats.annulees}</span>
+</div>
         <div className="favorites-link">
           <FaHeart />
           <span>Mes favoris</span>

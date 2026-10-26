@@ -1,6 +1,6 @@
 import "./Step2.css";
 
-const Step2 = ({ fragrance, setFragrance, onNext, onBack }) => {
+const Step2 = ({ fragrance, setFragrance }) => {
 
   const fragrances = [
     {
@@ -80,25 +80,7 @@ const Step2 = ({ fragrance, setFragrance, onNext, onBack }) => {
 
       </div>
 
-      <div className="order-navigation">
-
-        <button
-          className="back-btn"
-          onClick={onBack}
-        >
-          ← Retour
-        </button>
-
-        <button
-          className="next-btn"
-          disabled={!fragrance}
-          onClick={onNext}
-        >
-          Continuer →
-        </button>
-
-      </div>
-
+      
     </section>
   );
 };

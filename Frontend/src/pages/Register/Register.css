@@ -1,0 +1,126 @@
+
+/* Page d'inscription Minas Candles */
+
+.auth-page {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: #faf6f4;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  background: #ffffff;
+  border: 1px solid #eadbd7;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(80, 40, 45, 0.08);
+}
+
+.auth-card h1 {
+  margin: 0 0 12px;
+  color: #642d3b;
+  font-size: 28px;
+  text-align: center;
+}
+
+.auth-card > p {
+  margin: 0 0 28px;
+  color: #76666a;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-card label {
+  margin-top: 8px;
+  color: #49353b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auth-card input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #dccacb;
+  border-radius: 8px;
+  background: #fffdfd;
+  color: #33252a;
+  font: inherit;
+}
+
+.auth-card input:focus {
+  outline: 2px solid #bb8989;
+  outline-offset: 1px;
+  border-color: #bb8989;
+}
+
+.auth-card button {
+  margin-top: 18px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #642d3b;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-card button:hover {
+  background: #7a3b4b;
+}
+
+.auth-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-card .auth-error {
+  margin: 8px 0 0;
+  color: #b42318;
+  font-size: 14px;
+  text-align: left;
+}
+
+.auth-card .auth-success {
+  margin: 8px 0 0;
+  color: #18794e;
+  font-size: 14px;
+  text-align: left;
+}
+
+.auth-card .auth-switch {
+  margin: 24px 0 0;
+  font-size: 14px;
+}
+
+.auth-card a {
+  color: #8b4557;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-card a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 28px 22px;
+  }
+
+  .auth-card h1 {
+    font-size: 24px;
+  }
+}
+

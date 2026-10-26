@@ -1,333 +1,560 @@
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 
 import {
   FaHeart,
   FaComment,
   FaShare,
   FaBookmark,
-  FaEllipsisH
+  FaEllipsisH,
 } from "react-icons/fa";
 
 import "./PostCard.css";
 
+const API_URL = "http://localhost:3000";
+
 const PostCard = ({ post }) => {
+  const token = localStorage.getItem("minasToken");
+  const savedUser = localStorage.getItem("minasUser");
 
-  // LIKE
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(post.likes);
+  let user = null;
 
-  // COMMENTAIRES
+  try {
+    user = savedUser ? JSON.parse(savedUser) : null;
+  } catch {
+    user = null;
+  }
+
+  const userId = user?.id || user?._id;
+
+  const [liked, setLiked] = useState(
+    Boolean(
+      userId &&
+        post.likedBy?.some(
+          (id) => String(id?._id || id) === String(userId)
+        )
+    )
+  );
+
+  const [likes, setLikes] = useState(
+    post.likedBy?.length ?? post.likes ?? 0
+  );
+
+  const [liking, setLiking] = useState(false);
+  const [likeError, setLikeError] = useState("");
+
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [commentsLoading, setCommentsLoading] = useState(false);
+  const [commentError, setCommentError] = useState("");
+  const [commentSubmitting, setCommentSubmitting] = useState(false);
 
-  // PARTAGES
-  const [shares, setShares] = useState(post.shares);
-
-  // ENREGISTRER
+  const [shares, setShares] = useState(post.shares || 0);
   const [saved, setSaved] = useState(false);
+  const [savingPost, setSavingPost] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-
-  // =========================
-  // LIKE
-  // =========================
-
-  const handleLike = () => {
-
-    if (liked) {
-      setLikes(likes - 1);
-      setLiked(false);
-    } else {
-      setLikes(likes + 1);
-      setLiked(true);
-    }
-
-  };
-
-
-  // =========================
-  // COMMENTAIRE
-  // =========================
-
-  const handleComment = () => {
-
-    if (comment.trim() === "") {
+  useEffect(() => {
+    if (!token || !userId || !post._id) {
+      setSaved(false);
       return;
     }
 
-    setComments([
-      ...comments,
-      comment
-    ]);
+    const fetchSavedStatus = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/posts/saved-ids`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-    setComment("");
+        const data = await response.json();
 
+        if (response.ok && data.success) {
+          setSaved(
+            (data.savedPostIds || []).some(
+              (id) => String(id) === String(post._id)
+            )
+          );
+        }
+      } catch (error) {
+        console.error(
+          "Erreur de chargement des publications enregistrées :",
+          error
+        );
+      }
+    };
+
+    fetchSavedStatus();
+  }, [token, userId, post._id]);
+
+  useEffect(() => {
+    setLikes(post.likedBy?.length ?? post.likes ?? 0);
+
+    setLiked(
+      Boolean(
+        userId &&
+          post.likedBy?.some(
+            (id) => String(id?._id || id) === String(userId)
+          )
+      )
+    );
+  }, [post._id, post.likedBy, post.likes, userId]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      setCommentsLoading(true);
+      setCommentError("");
+
+      try {
+        const response = await fetch(
+          `${API_URL}/api/posts/${post._id}/comments`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(
+            data.message || "Impossible de charger les commentaires."
+          );
+        }
+
+        setComments(data.comments || []);
+      } catch (error) {
+        setCommentError(
+          error.message || "Erreur de chargement des commentaires."
+        );
+      } finally {
+        setCommentsLoading(false);
+      }
+    };
+
+    fetchComments();
+  }, [post._id]);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setSelectedImage(null);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [selectedImage]);
+
+  const handleSavePost = async () => {
+    if (!token || savingPost) return;
+
+    setSavingPost(true);
+
+    try {
+      const response = await fetch(`${API_URL}/api/posts/${post._id}/save`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || "Impossible d'enregistrer la publication."
+        );
+      }
+
+      setSaved(data.saved);
+    } catch (error) {
+      console.error("Erreur d'enregistrement :", error);
+      alert(error.message || "Une erreur est survenue.");
+    } finally {
+      setSavingPost(false);
+    }
   };
 
+  const handleLike = async () => {
+    if (!token || !userId) {
+      setLikeError("Connecte-toi pour aimer cette publication.");
+      return;
+    }
 
-  // =========================
-  // PARTAGER
-  // =========================
+    if (liking) return;
 
-  const handleShare = () => {
+    setLiking(true);
+    setLikeError("");
 
-    setShares(shares + 1);
+    try {
+      const response = await fetch(
+        `${API_URL}/api/posts/${post._id}/like`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Impossible de modifier le like.");
+      }
+
+      setLiked(data.liked);
+      setLikes(data.likes);
+    } catch (error) {
+      setLikeError(error.message || "Une erreur est survenue.");
+    } finally {
+      setLiking(false);
+    }
   };
 
+  const handleComment = async () => {
+    if (!token || !userId) {
+      setCommentError("Connecte-toi pour publier un commentaire.");
+      return;
+    }
 
-  // =========================
-  // AFFICHAGE
-  // =========================
+    if (!comment.trim() || commentSubmitting) return;
+
+    setCommentSubmitting(true);
+    setCommentError("");
+
+    try {
+      const response = await fetch(
+        `${API_URL}/api/posts/${post._id}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ text: comment.trim() }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || "Impossible de publier le commentaire."
+        );
+      }
+
+      setComments(data.comments || []);
+      setComment("");
+    } catch (error) {
+      setCommentError(error.message || "Une erreur est survenue.");
+    } finally {
+      setCommentSubmitting(false);
+    }
+  };
+
+  const handleShare = async () => {
+    const shareUrl = `${window.location.origin}/`;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: "Minas Candles",
+          text: post.content,
+          url: shareUrl,
+        });
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(shareUrl);
+        setLikeError("Lien copié ! Tu peux le partager.");
+      } else {
+        setLikeError("Le partage n'est pas disponible sur ce navigateur.");
+        return;
+      }
+
+      setShares((previous) => previous + 1);
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        setLikeError("Impossible de partager cette publication.");
+      }
+    }
+  };
+
+  const postImages =
+    post.images?.length > 0
+      ? post.images
+      : post.image
+        ? [post.image]
+        : [];
 
   return (
-
     <article className="post-card">
-
-      {/* HEADER */}
-
       <div className="post-header">
-
         <div className="post-avatar">
-          {post.author.charAt(0)}
+          {(post.author || "M").charAt(0).toUpperCase()}
         </div>
 
         <div className="post-author">
-
-          <strong>
-            {post.author}
-          </strong>
-
-          <small>
-            {post.time}
-          </small>
-
+          <strong>{post.author || "Membre Minas Candles"}</strong>
+          <small>{post.time}</small>
         </div>
 
-        <button className="post-menu">
-          <FaEllipsisH />
-        </button>
-
-      </div>
-
-
-      {/* CONTENU */}
-
-      <div className="post-content">
-
-        <p>
-          {post.content}
-        </p>
-
-      </div>
-
-
-      {/* IMAGE */}
-
-      {post.image && (
-
-        <div className="post-image">
-
-          <img
-            src={post.image}
-            alt={post.title || "Publication Minas Candles"}
-          />
-
-        </div>
-
-      )}
-
-
-      {/* PRODUIT */}
-
-      {post.product && (
-
-        <div className="post-product">
-
-          <div>
-
-            <strong>
-              {post.product.name}
-            </strong>
-
-            <span>
-              {post.product.price} DA
-            </span>
-
-          </div>
-
-          <button>
-            Commander
+        <div className="post-menu-container">
+          <button
+            type="button"
+            className="post-menu"
+            aria-label="Options de la publication"
+            aria-expanded={showMenu}
+            onClick={() => setShowMenu((previous) => !previous)}
+          >
+            <FaEllipsisH />
           </button>
 
-        </div>
+          {showMenu && (
+            <div className="post-menu-dropdown">
+              <button
+                type="button"
+                disabled={savingPost}
+                onClick={async () => {
+                  await handleSavePost();
+                  setShowMenu(false);
+                }}
+              >
+                <FaBookmark />
+                {savingPost
+                  ? "Enregistrement..."
+                  : saved
+                    ? "Retirer des enregistrements"
+                    : "Enregistrer"}
+              </button>
 
+              <button
+                type="button"
+                onClick={() => setShowMenu(false)}
+              >
+                Signaler la publication
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="post-content">
+        <p>{post.content}</p>
+      </div>
+
+      {/* Galerie de la publication */}
+      {postImages.length > 0 && (
+        <div
+          className={`post-gallery post-gallery-count-${Math.min(
+            postImages.length,
+            4
+          )}`}
+        >
+          {postImages.slice(0, 4).map((image, index) => (
+            <div className="post-gallery-item" key={index}>
+              <button
+                type="button"
+                className="post-gallery-image-button"
+                onClick={() => setSelectedImage(image)}
+                aria-label={`Agrandir la photo ${index + 1}`}
+              >
+                <img
+                  src={image}
+                  alt={`Photo ${index + 1} de la publication`}
+                  loading="lazy"
+                />
+              </button>
+
+              {index === 3 && postImages.length > 4 && (
+                <span className="post-gallery-more">
+                  +{postImages.length - 4}
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
       )}
 
+      {/* Fenêtre de photo agrandie */}
+      {selectedImage && (
+        <div
+          className="post-image-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo agrandie"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            type="button"
+            className="post-image-modal-close"
+            aria-label="Fermer la photo"
+            onClick={() => setSelectedImage(null)}
+          >
+            ×
+          </button>
 
-      {/* STATISTIQUES */}
+          <img
+            className="post-image-modal-content"
+            src={selectedImage}
+            alt="Photo agrandie de la publication"
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
+
+      {/* Carte produit avec prix et commande */}
+      {post.type === "produit" && (
+        <div className="post-product">
+          <div className="post-product-info">
+            <strong>
+              {post.productName ||
+                post.product?.name ||
+                "Produit Minas Candles"}
+            </strong>
+
+            {(post.productPrice ?? post.product?.price) != null && (
+              <span>
+                {Number(
+                  post.productPrice ?? post.product?.price
+                ).toLocaleString("fr-FR")}{" "}
+                DA
+              </span>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              if (post._id) {
+                window.location.href =
+                  `/commande?productId=${encodeURIComponent(post._id)}`;
+              }
+            }}
+          >
+            Commander
+          </button>
+        </div>
+      )}
+
+      {post.product?.name && (
+        <div className="post-product">
+          <div>
+            <strong>{post.product.name}</strong>
+            <span>{post.product.price} DA</span>
+          </div>
+          <button type="button">Commander</button>
+        </div>
+      )}
 
       <div className="post-stats">
-
-        <span>
-          ❤️ {likes}
-        </span>
-
-        <span>
-          {comments.length > 0
-            ? comments.length
-            : post.comments
-          } commentaires
-        </span>
-
-        <span>
-          {shares} partages
-        </span>
-
+        <span>❤️ {likes}</span>
+        <span>{comments.length} commentaires</span>
+        <span>{shares} partages</span>
       </div>
-
-
-      {/* ACTIONS */}
 
       <div className="post-actions">
-
-        {/* LIKE */}
-
         <button
+          type="button"
           className={liked ? "liked" : ""}
           onClick={handleLike}
+          disabled={liking}
         >
-
           <FaHeart />
-
-          J'aime
-
+          {liking ? "..." : "J'aime"}
         </button>
 
-
-        {/* COMMENTAIRE */}
-
         <button
-          onClick={() =>
-            setShowComments(!showComments)
-          }
+          type="button"
+          onClick={() => setShowComments((previous) => !previous)}
         >
-
           <FaComment />
-
           Commenter
-
         </button>
 
-
-        {/* PARTAGER */}
-
-        <button
-          onClick={handleShare}
-        >
-
+        <button type="button" onClick={handleShare}>
           <FaShare />
-
           Partager
-
         </button>
-
-
-        {/* ENREGISTRER */}
 
         <button
+          type="button"
           className={saved ? "saved" : ""}
-          onClick={() =>
-            setSaved(!saved)
-          }
+          disabled={savingPost}
+          onClick={handleSavePost}
         >
-
           <FaBookmark />
-
-          {saved
-            ? "Enregistré"
-            : "Enregistrer"
-          }
-
+          {savingPost
+            ? "Enregistrement..."
+            : saved
+              ? "Enregistré"
+              : "Enregistrer"}
         </button>
-
       </div>
 
-
-      {/* COMMENTAIRES */}
+      {likeError && (
+        <p className="post-feedback" role="status">
+          {likeError}
+        </p>
+      )}
 
       {showComments && (
-
         <div className="comments-section">
-
-          {/* FORMULAIRE */}
-
           <div className="comment-form">
-
             <input
               type="text"
               placeholder="Écrire un commentaire..."
               value={comment}
-              onChange={(e) =>
-                setComment(e.target.value)
-              }
-              onKeyDown={(e) => {
-
-                if (e.key === "Enter") {
+              onChange={(event) => setComment(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
                   handleComment();
                 }
-
               }}
             />
 
             <button
+              type="button"
               onClick={handleComment}
+              disabled={commentSubmitting}
             >
-              Publier
+              {commentSubmitting ? "Publication..." : "Publier"}
             </button>
-
           </div>
 
-
-          {/* LISTE */}
+          {commentError && (
+            <p className="post-feedback" role="alert">
+              {commentError}
+            </p>
+          )}
 
           <div className="comments-list">
+            {commentsLoading && <p>Chargement des commentaires...</p>}
 
-            {comments.map((item, index) => (
+            {!commentsLoading &&
+              comments.map((item) => (
+                <div className="comment" key={item._id}>
+                  <div className="comment-avatar">
+                    {(item.user?.name || "M").charAt(0).toUpperCase()}
+                  </div>
 
-              <div
-                className="comment"
-                key={index}
-              >
-
-                <div className="comment-avatar">
-                  M
+                  <div className="comment-content">
+                    <strong>
+                      {item.user?.name || "Membre Minas Candles"}
+                    </strong>
+                    <p>{item.text}</p>
+                  </div>
                 </div>
-
-                <div className="comment-content">
-
-                  <strong>
-                    Vous
-                  </strong>
-
-                  <p>
-                    {item}
-                  </p>
-
-                </div>
-
-              </div>
-
-            ))}
-
+              ))}
           </div>
-
         </div>
-
       )}
-
     </article>
-
   );
 };
 

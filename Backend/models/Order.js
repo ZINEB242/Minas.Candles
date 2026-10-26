@@ -1,7 +1,15 @@
+
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
+    // Compte client associé à la commande
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
+
     name: {
       type: String,
       required: true,
@@ -40,6 +48,19 @@ const orderSchema = new mongoose.Schema(
     orderType: {
       type: String,
       required: true,
+    },
+
+    status: {
+      type: String,
+      enum: [
+        "En attente",
+        "Confirmée",
+        "En préparation",
+        "Expédiée",
+        "Livrée",
+        "Annulée",
+      ],
+      default: "En attente",
     },
   },
   {

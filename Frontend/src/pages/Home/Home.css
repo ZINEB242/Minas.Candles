@@ -1,365 +1,571 @@
+
+/* ===== ACCUEIL MINAS CANDLES ===== */
+
 .home-page {
-  display: grid;
+  background: #faf6f3;
+  gap: 18px;
 
-  grid-template-columns: 230px minmax(500px, 680px) 280px;
-
-  justify-content: center;
-
-  gap: 20px;
-
-  padding: 20px 30px;
-
-  background: #faf6f2;
-
-  min-height: calc(100vh - 74px);
+display: grid;
+grid-template-columns: 230px minmax(0, 1fr) 280px;
+align-items: start;
+gap: 22px;
+width: 100%;
+max-width: none;
+margin: 0 ;
+padding: 24px 12px;
+box-sizing: border-box;
 }
 
-
-/* =================================
-   NEWS FEED
-================================= */
-
 .news-feed {
-  display: flex;
-
-  flex-direction: column;
-
+  min-width: 0;
   gap: 16px;
 }
 
+.share-card,
+.post-card {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fffdfc;
+  border: 1px solid #f0e7e2;
+  border-radius: 15px;
+  box-shadow: 0 3px 12px rgba(95, 61, 48, 0.045);
+}
 
-/* =================================
-   SHARE CARD
-================================= */
+
+
+/* ===== PARTAGE : DESIGN COMPACT MINAS CANDLES ===== */
 
 .share-card {
-  background: #fffdfb;
-
-  border: 1px solid #eee5df;
-
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 14px 8px;
+  margin: 0;
+  background: #fffdfc;
+  border: 1px solid #f0e7e2;
   border-radius: 14px;
-
-  box-shadow: 0 2px 8px rgba(80, 50, 40, 0.04);
-
+  box-shadow: 0 3px 12px rgba(95, 61, 48, 0.045);
   overflow: hidden;
 }
 
+/* Avatar et texte sur une seule ligne */
+
 .share-header {
   display: flex;
-
   align-items: center;
-
   gap: 12px;
-
-  padding: 18px;
+  min-height: 72px;
+  padding: 10px 0;
+  margin: 0;
 }
 
 .share-avatar {
-  width: 40px;
-  height: 40px;
-
-  border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #dfb8ac;
-
-  color: white;
-
-  font-weight: bold;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  border: 2px solid #f7e4dc;
+  border-radius: 50%;
+  background: #fff7f2;
+  color: #bd8277;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.share-header span {
-  color: #8b7c75;
-
+.share-open-button {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 8px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #8c817d;
+  text-align: left;
+  font-family: inherit;
   font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
+.share-open-button:hover {
+  background: #faf4f1;
+}
 
-/* OPTIONS */
+/* Ligne séparatrice et catégories */
 
 .share-options {
   display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  border-top: 1px solid #eee5df;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 5px 0 0;
+  margin: 0;
+  border-top: 1px solid #f0e7e2;
 }
 
 .share-options button {
-  border: none;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
+  min-height: 42px;
+  padding: 9px 5px;
+  border: 0;
+  border-right: 1px solid #f0e7e2;
+  border-radius: 0;
   background: transparent;
-
-  padding: 14px 5px;
-
-  color: #5f514b;
-
+  color: #655752;
+  font-family: inherit;
   font-size: 11px;
-
+  font-weight: 400;
+  white-space: nowrap;
   cursor: pointer;
-
-  border-right: 1px solid #eee5df;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .share-options button:last-child {
   border-right: none;
 }
 
-.share-options button:hover {
-  background: #faf0eb;
-
-  color: #c77f70;
+.share-options button:hover,
+.share-options button.active {
+  background: #fcf1ee;
+  color: #b76e6d;
 }
 
-
-/* =================================
-   POST
-================================= */
-
-.post-card {
-  background: #fffdfb;
-
-  border: 1px solid #eee5df;
-
-  border-radius: 14px;
-
-  overflow: hidden;
-
-  box-shadow: 0 2px 8px rgba(80, 50, 40, 0.04);
-}
-
-
-/* HEADER */
-
-.post-header {
-  display: flex;
-
+.share-option-icon {
+  display: inline-flex;
   align-items: center;
-
-  gap: 10px;
-
-  padding: 15px 18px;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #d77979;
+  font-size: 16px;
+  line-height: 1;
 }
 
-.post-avatar {
-  width: 40px;
-  height: 40px;
+/* Formulaire ouvert sous les catégories */
 
-  border-radius: 50%;
+.share-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 5px;
+  padding: 16px 0 5px;
+  border-top: 1px solid #f0e7e2;
+}
 
+@media (max-width: 480px) {
+  .share-card {
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+
+  .share-header {
+    min-height: 62px;
+    gap: 8px;
+  }
+
+  .share-avatar {
+    flex-basis: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .share-open-button {
+    padding: 9px 5px;
+    font-size: 12px;
+  }
+
+  .share-options button {
+    flex-direction: column;
+    gap: 4px;
+    min-height: 50px;
+    padding: 8px 2px;
+    font-size: 10px;
+  }
+
+  .share-option-icon {
+    font-size: 16px;
+  }
+}
+
+
+
+
+
+
+
+
+.share-options button {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #dfb8ac;
-
-  color: white;
-
-  font-weight: bold;
-}
-
-.post-header div:nth-child(2) {
-  display: flex;
-
-  flex-direction: column;
-}
-
-.post-header strong {
-  font-size: 13px;
-
-  color: #3e332e;
-}
-
-.post-header small {
-  margin-top: 3px;
-
-  color: #9a8c85;
-
-  font-size: 10px;
-}
-
-.post-menu {
-  margin-left: auto;
-
-  border: none;
-
+  gap: 7px;
+  min-width: 0;
+  padding: 13px 4px;
+  border: 0;
+  border-right: 1px solid #f0e7e2;
+  border-radius: 0;
   background: transparent;
+  color: #655752;
+  font-size: 11px;
+}
 
-  font-size: 20px;
-
-  color: #85756e;
-
-  cursor: pointer;
+.share-options button:last-child {
+  border-right: 0;
 }
 
 
-/* CONTENT */
 
-.post-content {
-  padding: 0 18px 14px;
-
-  font-size: 12px;
-
-  color: #554943;
-
-  line-height: 1.5;
+.share-options button.active {
+  background: #fbefed;
+  color: #a75e61;
+  box-shadow: inset 0 -2px #cb8580;
 }
 
-.post-content p {
-  margin: 4px 0;
+/* Formulaire */
+
+.share-form {
+  gap: 12px;
+  margin-top: 0;
+  padding: 16px 0 4px;
+  border-top: 1px solid #f0e7e2;
 }
 
-
-/* IMAGE */
-
-.post-image {
+.share-form textarea,
+.share-form input[type="text"],
+.share-form input[type="number"] {
+  box-sizing: border-box;
   width: 100%;
-
-  height: 330px;
-
-  overflow: hidden;
-
-  background: #f3e9e3;
+  border: 1px solid #eee1dc;
+  border-radius: 10px;
+  background: #fdfaf8;
+  color: #493b37;
+  font: inherit;
+  font-size: 13px;
+  padding: 12px;
 }
 
-.post-image img {
+.share-form textarea {
+  resize: vertical;
+}
+
+.share-form textarea:focus,
+.share-form input:focus {
+  outline: none;
+  border-color: #cf9188;
+  box-shadow: 0 0 0 3px rgba(207, 145, 136, 0.12);
+}
+
+.share-upload-label {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 0 !important;
+  color: #79534e !important;
+}
+
+.share-upload-label small {
+  margin-left: auto;
+  color: #9b8982;
+  font-weight: 400;
+}
+
+.share-form input[type="file"] {
+  font-size: 12px;
+}
+
+.product-fields {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+}
+
+.product-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* Aperçu des photos sélectionnées */
+
+.share-gallery-preview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.share-preview-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #f4e9e3;
+}
+
+.share-preview-item img {
+  display: block;
   width: 100%;
   height: 100%;
-
   object-fit: cover;
 }
 
+.share-preview-item button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(65, 43, 39, 0.78);
+  color: #fff;
+  font-size: 21px;
+  cursor: pointer;
+}
 
-/* PRODUCT */
+.share-message {
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff0ed;
+  color: #984e50;
+  font-size: 12px;
+}
+
+/* Filtres */
+
+.feed-filters {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+}
+
+.feed-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.feed-filters button {
+  flex: 0 0 auto;
+  padding: 9px 19px;
+  border: 1px solid #f0e8e4;
+  border-radius: 24px;
+  background: #fffdfc;
+  color: #665752;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.feed-filters button.active {
+  border-color: #f5e1df;
+  background: #f6e1e1;
+  color: #a75e61;
+}
+
+/* Carte produit */
 
 .post-product {
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  padding: 12px 18px;
-
-  background: #fff6f2;
-
-  border-bottom: 1px solid #eee5df;
-}
-
-.post-product div {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 4px;
-}
-
-.post-product strong {
-  font-size: 12px;
-
-  color: #493b36;
-}
-
-.post-product span {
-  font-size: 11px;
-
-  color: #9b6c60;
+  margin: 0 12px 12px;
+  padding: 12px 14px;
+  border: 1px solid #f0e4e0;
+  border-radius: 9px;
+  background: #fbf2f0;
 }
 
 .post-product button {
-  border: none;
-
-  background: #c77f70;
-
-  color: white;
-
-  padding: 8px 18px;
-
+  background: #ce7979;
   border-radius: 6px;
-
-  font-size: 11px;
-
-  cursor: pointer;
+  padding: 9px 20px;
+  font-weight: 600;
 }
 
-
-/* =================================
-   STATS
-================================= */
-
-.post-stats {
-  display: flex;
-
-  justify-content: space-between;
-
-  padding: 10px 18px;
-
-  color: #8d7e77;
-
-  font-size: 10px;
+.post-product button:hover {
+  background: #b9686b;
 }
 
-
-/* =================================
-   ACTIONS
-================================= */
-
-.post-actions {
-  display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  border-top: 1px solid #eee5df;
-}
-
-.post-actions button {
-  border: none;
-
-  background: transparent;
-
-  padding: 12px 5px;
-
-  color: #665852;
-
-  font-size: 11px;
-
-  cursor: pointer;
-}
-
-.post-actions button:hover {
-  background: #faf0eb;
-
-  color: #c77f70;
-}
-
-
-/* =================================
-   RESPONSIVE
-================================= */
-@media (max-width: 1100px) {
-  .home-page {
-    grid-template-columns: 210px minmax(450px, 1fr);
+@media (max-width: 700px) {
+  .share-card {
+    padding: 0 12px 10px;
   }
 
-  .right-sidebar {
-    display: none;
+  .share-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
-@media (max-width: 800px) {
-  .home-page {
+  .share-options button {
+    border-bottom: 1px solid #f0e7e2;
+  }
+
+  .share-options button:nth-child(2) {
+    border-right: 0;
+  }
+
+  .share-options button:nth-child(3),
+  .share-options button:nth-child(4) {
+    border-bottom: 0;
+  }
+
+  .share-gallery-preview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-fields {
     grid-template-columns: 1fr;
-    padding: 15px;
   }
 
-  .left-sidebar {
-    display: none;
+  .feed-filters {
+    gap: 7px;
   }
 
-  .news-feed {
+  .feed-filters button {
+    padding: 9px 14px;
+  }
+}
+/* Boutons du formulaire de partage */
+.share-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.share-form-actions button {
+  padding: 10px 20px;
+  border: 1px solid #eadbd5;
+  border-radius: 9px;
+  background: #fffaf8;
+  color: #765d55;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.share-form-actions button:hover {
+  background: #f7ebe6;
+}
+
+.share-form-actions button[type="submit"] {
+  border-color: #bd7976;
+  background: #bd7976;
+  color: white;
+  font-weight: 600;
+}
+
+.share-form-actions button[type="submit"]:hover {
+  background: #a96565;
+}
+
+.share-form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .share-form-actions button {
+    flex: 1;
+    padding: 10px;
+  }
+}
+/* Ajout de photos — style Minas Candles */
+.share-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 4px 0;
+}
+
+.share-file-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border: 1px solid #ead5d0;
+  border-radius: 10px;
+  background: #fff7f4;
+  color: #a76565;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.share-file-button:hover {
+  background: #f9eae6;
+  border-color: #d7aaa2;
+}
+
+.share-file-icon {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.share-file-button input[type="file"] {
+  display: none;
+}
+
+.share-upload-label small {
+  color: #9b8982;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+@media (max-width: 480px) {
+  .share-upload-label {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* ===== Sidebars persistantes pendant le défilement ===== */
+
+@media (min-width: 1001px) {
+  .home-page > :first-child,
+  .home-page > :last-child {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+    height: fit-content;
+    max-height: none;
+    overflow: visible;
+    min-width: 0;
+  }
+
+  .home-page > :first-child {
     width: 100%;
   }
+}
+/* ===== SUPPRIMER LES MARGES EXTÉRIEURES ===== */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
 }

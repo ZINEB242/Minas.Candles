@@ -1,11 +1,6 @@
 import "./Step5.css";
 
-const Step5 = ({
-  customer,
-  setCustomer,
-  onNext,
-  onBack,
-}) => {
+const Step5 = ({ customer, setCustomer }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -181,24 +176,7 @@ const Step5 = ({
 
       {/* NAVIGATION */}
 
-      <div className="order-navigation">
-
-        <button
-          className="back-btn"
-          onClick={onBack}
-        >
-          ← Retour
-        </button>
-
-        <button
-          className="next-btn"
-          disabled={!isComplete}
-          onClick={onNext}
-        >
-          Voir mon résumé →
-        </button>
-
-      </div>
+   
 
     </section>
   );

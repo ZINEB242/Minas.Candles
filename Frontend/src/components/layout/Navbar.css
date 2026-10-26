@@ -112,41 +112,33 @@
   gap: 25px;
 }
 
+
+
 .navbar-link {
   position: relative;
-
   height: 74px;
 
   display: flex;
   align-items: center;
-
   gap: 6px;
 
   text-decoration: none;
-
   color: #332b28;
-
   font-size: 13px;
-
   white-space: nowrap;
+
+  transition: color 0.25s ease;
 }
 
+/* Couleur au survol */
 .navbar-link:hover {
   color: #c77f70;
 }
 
-
-/* PAGE ACTIVE */
-
-.navbar-link.active {
-  color: #c77f70;
-}
-
-.navbar-link.active::after {
+/* Trait animé sous le lien */
+.navbar-link::after {
   content: "";
-
   position: absolute;
-
   bottom: 0;
   left: 0;
 
@@ -154,7 +146,26 @@
   height: 2px;
 
   background: #c77f70;
+
+  transform: scaleX(0);
+  transform-origin: center;
+
+  transition: transform 0.25s ease;
 }
+
+/* Trait visible sur la page active */
+.navbar-link.active {
+  color: #c77f70;
+}
+
+.navbar-link.active::after {
+  transform: scaleX(1);
+}
+
+
+
+/* PAGE ACTIVE */
+
 
 
 /* =================================
@@ -264,4 +275,57 @@
   font-size: 11px;
 
   color: #8c7b74;
+}
+
+.navbar-profile-wrapper {
+  position: relative;
+}
+
+.navbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.profile-arrow {
+  transition: transform 0.2s ease;
+}
+
+.profile-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 180px;
+  padding: 8px;
+  background: white;
+  border: 1px solid #eee5df;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(50, 35, 30, 0.12);
+  z-index: 1000;
+}
+
+.profile-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 11px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #332b28;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profile-dropdown button:hover {
+  background: #fff4ef;
 }

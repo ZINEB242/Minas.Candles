@@ -4,11 +4,12 @@ import "./Step3.css";
 const Step3 = ({
   colors,
   setColors,
-  onNext,
-  onBack,
+  customColor,
+  setCustomColor,
+  customImage,
+  setCustomImage,
 }) => {
-  const [customColor, setCustomColor] = useState("");
-  const [customImage, setCustomImage] = useState(null);
+
 
   const colorOptions = [
     {
@@ -70,13 +71,13 @@ const Step3 = ({
     }
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
+ const handleImageChange = (event) => {
+  const file = event.target.files[0];
 
-    if (file) {
-      setCustomImage(URL.createObjectURL(file));
-    }
-  };
+  if (file) {
+    setCustomImage(URL.createObjectURL(file));
+  }
+};
 
   return (
     <section className="order-container">
@@ -215,28 +216,7 @@ const Step3 = ({
 
       {/* NAVIGATION */}
 
-      <div className="order-navigation">
-
-        <button
-          className="back-btn"
-          onClick={onBack}
-        >
-          ← Retour
-        </button>
-
-        <button
-          className="next-btn"
-          disabled={
-            colors.length === 0 &&
-            customColor.trim() === "" &&
-            !customImage
-          }
-          onClick={onNext}
-        >
-          Continuer →
-        </button>
-
-      </div>
+      
 
     </section>
   );

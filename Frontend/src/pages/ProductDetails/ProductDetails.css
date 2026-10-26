@@ -1,0 +1,123 @@
+
+.product-details-page {
+  min-height: 100vh;
+  padding: 30px 6% 70px;
+  background: #fffdfb;
+  color: #332b28;
+}
+
+.product-details-back {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: #a96f63;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.product-details-back:hover {
+  text-decoration: underline;
+}
+
+.product-details-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 55px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.product-details-image {
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f5eee9;
+}
+
+.product-details-image img {
+  display: block;
+  width: 100%;
+  max-height: 600px;
+  min-height: 350px;
+  object-fit: cover;
+}
+
+.product-details-info {
+  padding: 20px 0;
+}
+
+.product-details-brand {
+  color: #b77b70;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.product-details-category {
+  margin: 25px 0 8px;
+  color: #9b8177;
+  font-size: 14px;
+}
+
+.product-details-info h1 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.product-details-price {
+  margin: 20px 0;
+  color: #a96f63;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.product-details-description,
+.product-details-note,
+.product-details-fragrance {
+  color: #786861;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.product-details-note {
+  margin: 25px 0;
+  padding-top: 18px;
+  border-top: 1px solid #eee3dd;
+}
+
+.product-details-order {
+  display: inline-block;
+  width: 100%;
+  padding: 15px 22px;
+  border-radius: 8px;
+  background: #bd8175;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+
+.product-details-order:hover {
+  background: #a96f63;
+}
+
+@media (max-width: 768px) {
+  .product-details-page {
+    padding: 22px 18px 45px;
+  }
+
+  .product-details-content {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .product-details-image img {
+    min-height: 250px;
+    max-height: 420px;
+  }
+
+  .product-details-info {
+    padding-top: 0;
+  }
+}

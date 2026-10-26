@@ -1,0 +1,275 @@
+
+.category-page {
+  min-height: 100vh;
+  padding: 30px 20px 60px;
+  background: #fffdfb;
+  color: #332b28;
+}
+
+.category-header {
+  text-align: center;
+  padding: 30px 0 40px;
+}
+
+.category-header h1 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.category-header p {
+  margin-top: 12px;
+  color: #8d746b;
+  font-size: 14px;
+}
+
+.category-products {
+  max-width: 1200px;
+  margin: 0 auto 35px;
+}
+
+.category-products .products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.category-products .product-card {
+  background: #ffffff;
+  border: 1px solid #eee5df;
+  border-radius: 14px;
+  padding-bottom: 20px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.category-products .product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(80, 50, 40, 0.10);
+}
+
+.category-products .product-card img {
+  width: 100%;
+  height: 280px;
+  display: block;
+  object-fit: cover;
+}
+
+.category-products .product-card h2 {
+  margin: 18px 18px 8px;
+  font-size: 19px;
+}
+
+.category-products .product-card p {
+  margin: 0 18px 15px;
+  color: #8d746b;
+}
+
+.category-products .product-card a {
+  display: inline-block;
+  margin: 0 18px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #c77f70;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+
+.category-products .product-card a:hover {
+  background: #b86f61;
+}
+
+.category-empty {
+  padding: 35px 15px;
+  text-align: center;
+  color: #8d746b;
+}
+
+.category-back {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  color: #a96f63;
+  text-decoration: none;
+}
+
+.category-back:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  .category-products .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .category-page {
+    padding: 20px 15px 40px;
+  }
+
+  .category-header h1 {
+    font-size: 29px;
+  }
+
+  .category-products .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-products .product-card img {
+    height: 250px;
+  }
+}
+
+/* ================================
+   GALERIE BABY BOY — MINAS CANDLES
+================================ */
+
+.baby-boy-gallery {
+  width: 100%;
+  padding: 10px 0 35px;
+}
+
+.baby-boy-intro {
+  max-width: 720px;
+  margin: 0 auto 35px;
+  padding: 20px;
+  text-align: center;
+}
+
+.baby-boy-intro h2 {
+  margin: 12px 0;
+  color: #6b303d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 500;
+}
+
+.baby-boy-intro p {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #806c68;
+  font-size: 0.96rem;
+  line-height: 1.8;
+}
+
+.baby-boy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.baby-boy-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #eadbd6;
+  border-radius: 18px;
+  background: #fffaf7;
+  box-shadow: 0 5px 18px rgba(91, 48, 53, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.baby-boy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(91, 48, 53, 0.13);
+}
+
+.baby-boy-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  overflow: hidden;
+  background: #f3e8e3;
+}
+
+.baby-boy-images img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #f3e8e3;
+}
+
+.baby-boy-images img:only-child {
+  grid-column: 1 / -1;
+  height: 300px;
+}
+
+.baby-boy-order {
+  display: inline-block;
+  margin: 16px 18px 0;
+  padding: 7px 12px;
+  border-radius: 4px;
+  background: #6b303d;
+  color: #fffaf7;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.baby-boy-card-content {
+  padding: 20px;
+}
+
+.baby-boy-card-content h3 {
+  margin: 0 0 10px;
+  color: #6b303d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.baby-boy-card-content p {
+  margin: 0 0 18px;
+  color: #806c68;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.baby-boy-contact {
+  display: inline-block;
+  padding: 10px 17px;
+  border: 1px solid #b77c80;
+  border-radius: 25px;
+  color: #6b303d;
+  font-size: 0.86rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.baby-boy-contact:hover {
+  background: #6b303d;
+  color: #fffaf7;
+}
+
+@media (max-width: 1000px) {
+  .baby-boy-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .baby-boy-images img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .baby-boy-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .baby-boy-intro {
+    padding: 15px 5px;
+  }
+
+  .baby-boy-images img {
+    height: 230px;
+  }
+
+  .baby-boy-images img:only-child {
+    height: 320px;
+  }
+}

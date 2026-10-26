@@ -1,0 +1,194 @@
+
+.notifications-page {
+  width: min(100% - 32px, 850px);
+  margin: 35px auto;
+  padding: 28px;
+  background: #fffaf9;
+  border: 1px solid #f0e3e1;
+  border-radius: 18px;
+  box-sizing: border-box;
+  color: #3f292d;
+  min-height: 300px;
+}
+
+.notifications-page h1 {
+  margin: 0 0 8px;
+  color: #702d3b;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.notifications-subtitle {
+  margin: 0 0 24px;
+  color: #8c7779;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.notification-card {
+  position: relative;
+  padding: 18px 20px;
+  background: #ffffff;
+  border: 1px solid #f0e2e3;
+  border-left: 4px solid #bb8989;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(85, 42, 50, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.notification-card:hover {
+  border-left-color: #702d3b;
+  box-shadow: 0 5px 14px rgba(85, 42, 50, 0.08);
+}
+
+.notification-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.notification-card .notification-author {
+  margin-top: 8px;
+  color: #9a8587;
+  font-size: 12px;
+}
+
+.notification-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.pending-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #f8e9ec;
+  color: #702d3b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.approve-button {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #702d3b;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.approve-button:hover {
+  background: #8c4050;
+}
+
+.approve-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.notifications-page > p:not(.notifications-subtitle) {
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px dashed #e7d2d5;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #8c7779;
+  text-align: center;
+  font-size: 14px;
+}
+
+.notifications-message,
+.notifications-error {
+  width: min(100% - 32px, 850px);
+  margin: 35px auto;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.notifications-message {
+  background: #fffaf9;
+  color: #702d3b;
+}
+
+.notifications-error {
+  background: #fff0f0;
+  color: #a12635;
+}
+
+@media (max-width: 600px) {
+  .notifications-page {
+    width: calc(100% - 24px);
+    margin: 20px auto;
+    padding: 18px 14px;
+    border-radius: 14px;
+  }
+
+  .notifications-page h1 {
+    font-size: 24px;
+  }
+
+  .notification-card {
+    padding: 15px;
+  }
+
+  .notification-actions {
+    align-items: flex-start;
+  }
+}
+
+.notification-heading {
+  margin-bottom: 10px;
+}
+
+.notification-type {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 20px;
+  background: #f8eeeb;
+  color: #986565;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.notification-type-new_post {
+  background: #f4e6dc;
+  color: #875638;
+}
+
+.notification-type-post_liked {
+  background: #f9e5eb;
+  color: #ad526d;
+}
+
+.notification-type-post_commented {
+  background: #eee7f5;
+  color: #785b96;
+}
+
+.notification-type-post_approved {
+  background: #e5f2e8;
+  color: #3f7850;
+}
+
+.notification-type-post_rejected {
+  background: #f9e5e5;
+  color: #a44949;
+}

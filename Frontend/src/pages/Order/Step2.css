@@ -83,3 +83,20 @@
 .back-btn:hover {
   background: #f8f4f1;
 }
+
+/* Adaptation de la grille des senteurs */
+@media (max-width: 600px) {
+  .fragrance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .fragrance-card {
+    min-height: 110px;
+    padding: 12px 8px;
+  }
+
+  .fragrance-name {
+    text-align: center;
+  }
+}

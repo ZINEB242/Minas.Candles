@@ -199,3 +199,135 @@
 .next-btn:not(:disabled):hover {
   background: #b86f61;
 }
+
+/* =========================
+   NOUVELLE PAGE DE PERSONNALISATION
+========================= */
+
+.order-page:has(.order-layout) {
+  display: block;
+  padding: 40px;
+}
+
+.order-layout {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.8fr);
+  align-items: start;
+  gap: 30px;
+}
+
+.order-form-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-width: 0;
+}
+
+.order-form-sections .order-container {
+  max-width: none;
+  padding: 40px;
+  text-align: left;
+}
+
+.order-form-sections .order-container h1 {
+  font-size: 30px;
+}
+
+.order-form-sections .order-container > p {
+  margin-bottom: 25px;
+}
+
+.order-form-sections .step-number {
+  margin-bottom: 15px;
+}
+
+/* Le récapitulatif reste visible à droite au défilement */
+.order-summary {
+  min-width: 0;
+  position: sticky;
+  top: 25px;
+}
+
+.order-summary .summary-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 30px 24px;
+  box-sizing: border-box;
+}
+
+.order-summary .summary-container h1 {
+  font-size: 27px;
+}
+
+.order-summary .summary-container > p {
+  font-size: 13px;
+}
+
+.order-summary .summary-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-summary .summary-navigation button {
+  width: 100%;
+}
+
+/* Éviter les débordements sur les écrans moyens */
+@media (max-width: 1000px) {
+  .order-page:has(.order-layout) {
+    padding: 25px 16px;
+  }
+
+  .order-layout {
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 18px;
+  }
+
+  .order-form-sections .order-container {
+    padding: 30px 24px;
+  }
+}
+
+/* Téléphone et petits écrans : résumé sous les sections */
+@media (max-width: 760px) {
+  .order-page:has(.order-layout) {
+    padding: 20px 12px;
+  }
+
+  .order-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .order-summary {
+    position: static;
+  }
+
+  .order-form-sections .order-container {
+    padding: 30px 20px;
+  }
+
+  .order-form-sections .order-container h1 {
+    font-size: 26px;
+  }
+
+  .order-form-sections .occasion-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .order-summary .summary-container {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .order-form-sections .occasion-grid {
+    grid-template-columns: 1fr;
+  }
+}

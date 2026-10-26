@@ -1,15 +1,35 @@
+import { useEffect, useState } from "react";
 import "./Summary.css";
-
 const Summary = ({
   occasion,
   fragrance,
   colors,
+  customColor,
+  customImage,
   message,
   messageImage,
   customer,
-  onBack,
   onConfirm,
 }) => {
+
+  const [messageImagePreview, setMessageImagePreview] = useState("");
+
+useEffect(() => {
+  if (!messageImage) {
+    setMessageImagePreview("");
+    return;
+  }
+
+  if (typeof messageImage === "string") {
+    setMessageImagePreview(messageImage);
+    return;
+  }
+
+  const imageUrl = URL.createObjectURL(messageImage);
+  setMessageImagePreview(imageUrl);
+
+  return () => URL.revokeObjectURL(imageUrl);
+}, [messageImage]);
   return (
     <section className="summary-container">
 
@@ -49,28 +69,35 @@ const Summary = ({
           <strong>{fragrance || "Non précisée"}</strong>
         </div>
 
-        <div className="summary-row">
+       <div className="summary-row">
+  <span>Couleurs</span>
+  <div className="summary-colors">
+    {colors.length > 0 ? (
+      colors.map((color, index) => (
+        <span className="summary-color" key={index}>{color}</span>
+      ))
+    ) : (
+      <strong>{customColor || "Non précisées"}</strong>
+    )}
+  </div>
+</div>
 
-          <span>Couleurs</span>
+{customColor && colors.length > 0 && (
+  <div className="summary-row">
+    <span>Couleur personnalisée</span>
+    <strong>{customColor}</strong>
+  </div>
+)}
 
-          <div className="summary-colors">
-
-            {colors.length > 0 ? (
-              colors.map((color, index) => (
-                <span
-                  className="summary-color"
-                  key={index}
-                >
-                  {color}
-                </span>
-              ))
-            ) : (
-              <strong>Personnalisée</strong>
-            )}
-
-          </div>
-
-        </div>
+{customImage && (
+  <div className="summary-image">
+    <span>Photo de référence des couleurs</span>
+    <img
+      src={customImage}
+      alt="Référence des couleurs personnalisées"
+    />
+  </div>
+)}
 
         <div className="summary-message">
 
@@ -84,24 +111,16 @@ const Summary = ({
 
         {/* IMAGE */}
 
-        {messageImage && (
-          <div className="summary-image">
+       {messageImagePreview && (
+  <div className="summary-image">
+    <span>Image de référence</span>
 
-            <span>
-              Image de référence
-            </span>
-
-            <img
-              src={
-                typeof messageImage === "string"
-                  ? messageImage
-                  : URL.createObjectURL(messageImage)
-              }
-              alt="Référence"
-            />
-
-          </div>
-        )}
+    <img
+      src={messageImagePreview}
+      alt="Référence"
+    />
+  </div>
+)}
 
       </div>
 
@@ -183,23 +202,15 @@ const Summary = ({
           NAVIGATION
       ========================= */}
 
-      <div className="summary-navigation">
-
-        <button
-          className="back-btn"
-          onClick={onBack}
-        >
-          ← Modifier
-        </button>
-
-        <button
-          className="confirm-btn"
-          onClick={onConfirm}
-        >
-          ✓ Confirmer ma commande
-        </button>
-
-      </div>
+    <div className="summary-navigation">
+  <button
+    type="button"
+    className="confirm-btn"
+    onClick={onConfirm}
+  >
+    ✓ Confirmer ma commande
+  </button>
+</div>
 
     </section>
   );

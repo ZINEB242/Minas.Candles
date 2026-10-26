@@ -1,14 +1,7 @@
 import { useState } from "react";
 import "./Step4.css";
 
-const Step4 = ({
-  message,
-  setMessage,
-  messageImage,
-  setMessageImage,
-  onNext,
-  onBack,
-}) => {
+const Step4 = ({ message, setMessage, messageImage, setMessageImage }) => {
   const [imagePreview, setImagePreview] = useState(messageImage || null);
 
   const handleImageChange = (event) => {
@@ -118,27 +111,7 @@ const Step4 = ({
 
       {/* NAVIGATION */}
 
-      <div className="order-navigation">
-
-        <button
-          className="back-btn"
-          onClick={onBack}
-        >
-          ← Retour
-        </button>
-
-        <button
-          className="next-btn"
-          disabled={
-            message.trim() === "" &&
-            !messageImage
-          }
-          onClick={onNext}
-        >
-          Continuer →
-        </button>
-
-      </div>
+     
 
     </section>
   );
